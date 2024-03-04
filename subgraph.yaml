@@ -1,10 +1,12 @@
-specVersion: 0.0.2
+specVersion: 1.0.0
 schema:
   file: ./schema.graphql
+indexerHints:
+  prune: auto
 dataSources:
   - kind: ethereum/contract
     name: ERC1155
-    network: mainnet
+    network: matic
     source:
       abi: ERC1155
       # eth start block
@@ -13,7 +15,7 @@ dataSources:
       # startBlock: 1555120
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NftContract
@@ -46,7 +48,7 @@ dataSources:
       # startBlock: 1555120
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NftContract
@@ -59,6 +61,7 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferErc721
+          receipt: true
       file: ./src/mapping-generic-erc721.ts
  ########################   NON STANDARD NFTS   ################################
  # CryptoKitties (comment out on non-mainnet deployments)
@@ -71,7 +74,7 @@ dataSources:
       abi: KittyCore
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NftContract
@@ -105,7 +108,7 @@ dataSources:
       abi: CryptoPunk
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NftContract
@@ -144,7 +147,7 @@ templates:
       abi: ERC721
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NftContract
@@ -157,4 +160,5 @@ templates:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferErc721
+          receipt: true
       file: ./src/mapping-generic-erc721.ts

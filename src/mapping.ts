@@ -116,5 +116,5 @@ export function toBytes (hexString: String): Bytes {
   for (let i = 0; i < hexString.length; i += 2) {
     result[i / 2] = parseInt(hexString.substr(i, 2), 16) as u32
   }
-  return result as Bytes
+  return Bytes.fromUint8Array(result)
 }
